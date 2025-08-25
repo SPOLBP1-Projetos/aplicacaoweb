@@ -267,8 +267,30 @@
       color: #ccc;
       font-size: 0.9rem;
     }
-
-
+    .user {
+            position: absolute;
+            height: fit-content;
+            margin-left: 80vw;
+            padding: 10px;
+            margin-top: -4.5vh;
+          }
+          .sair {
+            position: absolute;
+            height: fit-content;
+            margin-left: 90vw;
+            padding: 10px;
+            margin-top: -4.5vh;
+          }
+          .sair a {
+            font-size: 23px;
+            text-decoration: none;
+            color: rgb(255, 0, 0);
+          }
+          .sair :hover{
+            font-size: 23px;
+            text-decoration: none;
+            color: black;
+          }
     /* Responsividade */
     @media (max-width: 768px) {
       nav ul {
@@ -302,12 +324,14 @@
  
   <nav>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#" class="active">Entretenimento</a></li>
-      <li><a href="#">Política</a></li>
-      <li><a href="#">Esporte</a></li>
-      <li><a href="#">Receitas</a></li>
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="entretenimento.html">Entretenimento</a></li>
+      <li><a href="politica.html">Política</a></li>
+      <li><a href="esportes.html">Esporte</a></li>
+      <li><a href="receitas.html">Receitas</a></li>
     </ul>
+    <div class="user"><h2>{{ session['username'] }}</h2></div>
+    <div class="sair"><h2><a href="/logout">Sair</a></h2></div>
   </nav>
 
 
@@ -326,7 +350,7 @@
 
   <main>
     <section class="cards">
-      <div class="card" onclick="window.location.href='noticia-entretenimento.html'">
+      <div class="card" onclick="window.location.href='entretenimento.html'">
         <div class="card-image">
           <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d057480e-b8d8-4a88-8512-7e049ba81aae.png" alt="Capa do novo filme de sucesso que está em cartaz nos cinemas" />
         </div>
@@ -340,7 +364,7 @@
 
 
     
-      <div class="card" onclick="window.location.href='noticia-musica.html'">
+      <div class="card" onclick="window.location.href='politica.html'">
         <div class="card-image">
           <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/15ee1538-4919-43d0-af36-0479fd63b285.png" alt="Show ao vivo de artista famoso com plateia animada e efeitos de luz" />
         </div>
@@ -354,7 +378,7 @@
 
 
      
-      <div class="card" onclick="window.location.href='noticia-serie.html'">
+      <div class="card" onclick="window.location.href='esportes.html'">
         <div class="card-image">
           <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5e31b2f7-8b72-43e6-99a8-cbbc6ffb9b7f.png" alt="Cena emocionante da nova série de streaming que está fazendo sucesso" />
         </div>
@@ -368,7 +392,7 @@
 
 
     
-      <div class="card" onclick="window.location.href='noticia-festival.html'">
+      <div class="card" onclick="window.location.href='receitas.html'">
         <div class="card-image">
           <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50a05c6c-7bd1-47a1-9435-bbcb2ca278b6.png" alt="Palco principal de festival de música com multidão e show noturno" />
         </div>
@@ -402,8 +426,3 @@
 
 </body>
 </html>
-
-
-
-
-

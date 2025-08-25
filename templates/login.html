@@ -164,7 +164,7 @@
       <h1><span>Fresh</span><span>News</span></h1>
     </div>
    
-    <form id="loginForm">
+    <form action="/login" method="post" id="loginForm">
       <div class="form-group">
         <label for="username">Insira o nome:</label>
         <input type="text" id="username" class="form-input" placeholder="Digite seu nome de usuário" required>
@@ -184,23 +184,6 @@
   </div>
 
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-     
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-     
-    
-      if (username && password) {
-        alert('Login realizado com sucesso!');
-       
-        window.location.href = 'index.html';
-      } else {
-        alert('Por favor, preencha todos os campos.');
-      }
-    });
-  </script>
 </body>
 </html>
 
