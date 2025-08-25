@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshNews - Login</title>
+  <style>
+   
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f25c05 0%, #e55304 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+
+    .login-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+
+    .logo h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #f25c05;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .logo span:first-child {
+      color: #f25c05;
+    }
+
+
+    .logo span:last-child {
+      color: #333;
+    }
+
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+
+    .form-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+
+    .form-input:focus {
+      outline: none;
+      border-color: #f25c05;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(242, 92, 5, 0.1);
+    }
+
+
+    .form-input::placeholder {
+      color: #999;
+    }
+
+
+    .login-button {
+      width: 100%;
+      padding: 15px;
+      background: #f25c05;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+
+    .login-button:hover {
+      background: #e55304;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(242, 92, 5, 0.3);
+    }
+
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+
+
+    .footer-links {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+
+    .footer-links a:hover {
+      color: #f25c05;
+    }
+
+
+ 
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+     
+      .logo h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <h1><span>Fresh</span><span>News</span></h1>
+    </div>
+   
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Insira o nome:</label>
+        <input type="text" id="username" class="form-input" placeholder="Digite seu nome de usuário" required>
+      </div>
+     
+      <div class="form-group">
+        <label for="password">Insira a senha:</label>
+        <input type="password" id="password" class="form-input" placeholder="Digite sua senha" required>
+      </div>
+     
+      <button type="submit" class="login-button">Entrar</button>
+    </form>
+   
+    <div class="footer-links">
+      <a href="#">Esqueceu a senha?</a> • <a href="#">Criar conta</a>
+    </div>
+  </div>
+
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+     
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+     
+    
+      if (username && password) {
+        alert('Login realizado com sucesso!');
+       
+        window.location.href = 'index.html';
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
