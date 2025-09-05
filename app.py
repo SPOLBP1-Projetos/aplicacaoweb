@@ -1,31 +1,90 @@
-from flask import Flask, redirect, url_for, render_template, request, session, make_response
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-app.secret_key = '1234'
+# -------------------------
+# Página inicial (escolha)
+# -------------------------
+@app.route("/")
+def escolha():
+    return render_template("escolha.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
-def carregarform():
-    tema = request.cookies.get("tema", "claro")
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+# -------------------------
+# Rotas do MPA
+# -------------------------
+@app.route("/mpa")
+def mpa_home():
+    return render_template("MPA/home.html")
 
-        # Verifica as credenciais
-        if username == "admin" and password == "1234":
-            # Se as credenciais estiverem corretas, define a sessão como permanente
-            # e armazena o nome de usuário na sessão.
-            session.permanent = True
-            session["username"] = username
-            return redirect(url_for("/home"))
-        else:
-            # Se as credenciais estiverem incorretas, renderiza a página de login
-            # novamente com uma mensagem de erro.
-            return render_template("login.html", error="Usuário ou senha inválidos.", tema=tema)
-        
-@app.route("/logout")
-def logout():
-    session.pop("username", None)
-    session.pop("views", None)
-    return redirect(url_for("carregarform"))
+@app.route("/mpa/entretenimento")
+def mpa_entretenimento():
+    return render_template("MPA/entretenimento.html")
+
+@app.route("/mpa/politica")
+def mpa_politica():
+    return render_template("MPA/politica.html")
+
+@app.route("/mpa/esportes")
+def mpa_esportes():
+    return render_template("MPA/esportes.html")
+
+@app.route("/mpa/receitas")
+def mpa_receitas():
+    return render_template("MPA/receitas.html")
+
+
+# -------------------------
+# Rotas do SSR (server-side rendering)
+# -------------------------
+@app.route("/ssr")
+def ssr_home():
+    # Aqui, o Python já monta os dados e envia prontos para o template
+    noticias = [
+        {"titulo": "Notícia SSR 1", "conteudo": "Conteúdo gerado pelo servidor"},
+        {"titulo": "Notícia SSR 2", "conteudo": "Outro conteúdo vindo direto do servidor"}
+    ]
+    return render_template("SSR/index.html", noticias=noticias)
+
+
+# -------------------------
+# Rotas do CSR (client-side rendering)
+# -------------------------
+@app.route("/csr")
+def csr_home():
+    # Apenas entrega o HTML vazio + JS
+    return render_template("CSR/index.html")
+
+@app.route("/api/csr_noticias")
+def api_csr_noticias():
+    # API que o JavaScript vai consumir
+    noticias = [
+        {"titulo": "Notícia CSR 1", "conteudo": "Carregada via fetch()"},
+        {"titulo": "Notícia CSR 2", "conteudo": "Outra notícia via AJAX"}
+    ]
+    return jsonify(noticias)
+
+
+# -------------------------
+# Rotas do CCR (client + server)
+# -------------------------
+@app.route("/ccr")
+def ccr_home():
+    # Renderiza parte no servidor
+    noticias = [
+        {"titulo": "Notícia CCR 1", "conteudo": "Mistura server + client"},
+    ]
+    return render_template("CCR/index.html", noticias=noticias)
+
+@app.route("/api/ccr_noticias")
+def api_ccr_noticias():
+    # Complementa depois no cliente
+    noticias = [
+        {"titulo": "Notícia CCR 2", "conteudo": "Carregada via AJAX"},
+        {"titulo": "Notícia CCR 3", "conteudo": "Mais dados após o load inicial"}
+    ]
+    return jsonify(noticias)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
