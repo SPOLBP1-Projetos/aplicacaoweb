@@ -1,11 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshNews - SSR</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <h1>Teste</h1>
+<body class="body">
+  
+  <header class="header">
+    <div class="logo"><span>Fresh</span>News</div>
+  </header>
+
+  <nav class="nav">
+    <ul class="nav-ul">
+      <li><a href="{{ url_for('ssr_categoria', categoria='home') }}" class="nav-a">Home</a></li>
+      <li><a href="{{ url_for('ssr_categoria', categoria='entretenimento') }}" class="nav-a">Entretenimento</a></li>
+      <li><a href="{{ url_for('ssr_categoria', categoria='política') }}" class="nav-a">Política</a></li>
+      <li><a href="{{ url_for('ssr_categoria', categoria='esporte') }}" class="nav-a">Esporte</a></li>
+      <li><a href="{{ url_for('ssr_categoria', categoria='receitas') }}" class="nav-a">Receitas</a></li>
+    </ul>
+    <div class="user"><h2>{{ session['username'] }}</h2></div>
+    <div class="sair"><h2><a href="/logout">Sair</a></h2></div>
+  </nav>
+
+  <div class="categoria-titulo">
+    <h2>Categoria: {{ categoria|capitalize }}</h2>
+    <div class="linha-laranja"></div>
+  </div>
+
+  <main class="main">
+    <h2>Notícias (renderizadas pelo servidor)</h2>
+    <section id="noticias-servidor" class="cards">
+      {% for noticia in noticias %}
+      <div class="card">
+        <div class="card-content">
+          <h3>{{ noticia.titulo }}</h3>
+          <p>{{ noticia.conteudo }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>FreshNews - Sua fonte confiável de informação</strong></p>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a> |
+        <a href="#">Termos de Uso</a> |
+        <a href="#">Anuncie</a> |
+        <a href="#">Contato</a>
+      </div>
+      <div class="copyright">
+        © 2025 FreshNews - Todos os direitos reservados
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

@@ -1,11 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshNews - Notícia Completa</title>
+  <link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
 </head>
-<body>
-    <h1>Teste2</h1>
+<body class="body">
+  
+  <header class="header">
+    <div class="logo"><span>Fresh</span>News</div>
+  </header>
+
+  <nav class="nav">
+    <ul class="nav-ul">
+      <li class="nav-li"><a href="" class="nav-a">Home</a></li>
+      <li><a href="#" class="nav-a">Entretenimento</a></li>
+      <li><a href="#" class="nav-a">Política</a></li>
+      <li><a href="#" class="nav-a">Esporte</a></li>
+      <li><a href="#" class="nav-a">Receitas</a></li>
+    </ul>
+    <div class="user"><h2>{{ session['username'] }}</h2></div>
+    <div class="sair"><h2><a href="/logout">Sair</a></h2></div>
+  </nav>
+
+ 
+  <div class="categoria-titulo">
+    <h2>Olá, usuário!</h2>
+    <div class="linha-laranja"></div>
+  </div>
+
+
+ <main class="main">
+    <h2>Notícias Iniciais (Servidor)</h2>
+    <section id="noticias-servidor" class="cards">
+      {% for noticia in noticias %}
+      <div class="card">
+        <div class="card-content">
+          <h3>{{ noticia.titulo }}</h3>
+          <p>{{ noticia.conteudo }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <h2>Notícias Extras (Carregadas no Cliente)</h2>
+    <section id="noticias-cliente" class="cards">
+      <!-- JavaScript vai inserir aqui -->
+    </section>
+  </main>
+
+
+ 
+  <footer class="footer">
+    <div class="footer-content">
+      <p><strong>FreshNews - Sua fonte confiável de informação</strong></p>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a> |
+        <a href="#">Termos de Uso</a> |
+        <a href="#">Anuncie</a> |
+        <a href="#">Contato</a>
+      </div>
+      <div class="copyright">
+        © 2025 FreshNews - Todos os direitos reservados
+      </div>
+    </div>
+  </footer>
+
+<script src="static/js/script.js">    // Assim que a página carrega, busca mais notícias via API
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/api/ccr_noticias")
+        .then(response => response.json())
+        .then(noticias => {
+          const container = document.getElementById("noticias-cliente");
+          noticias.forEach(noticia => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
+              <div class="card-content">
+                <h3>${noticia.titulo}</h3>
+                <p>${noticia.conteudo}</p>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(error => console.error("Erro ao carregar notícias extras:", error));
+    });
+</script>
 </body>
 </html>
