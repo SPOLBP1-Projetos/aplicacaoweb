@@ -89,46 +89,5 @@ def api_csr_noticias():
     ]
     return jsonify(noticias)
 
-
-# -------------------------
-# Rotas do CCR (client + server)
-# -------------------------
-@app.route("/ccr")
-def ccr_home():
-    # Renderiza parte no servidor
-    noticias = [
-        {"titulo": "Filme 'A Grande Aventura' bate recorde de bilheteira em seu primeiro fim de semana", "conteudo": "O novo filme de ação 'A Grande Aventura' arrecadou mais de R$ 10 milhões em seu primeiro fim de semana nos cinemas."},
-        {"titulo": "Análise: Exibição militar da China mostra risco da política de tarifas de Trump", "conteudo": "O poderio militar da República Popular da China foi plenamente exibido em um desfile que marcou o 80º aniversário do fim da Segunda Guerra Mundial na quarta-feira (3/9)."},
-    ]
-    return render_template("CCR/index.html", noticias=noticias)
-
-@app.route("/api/ccr_categoria/<string:categoria>")
-def api_ccr_categoria(categoria):
-    noticias_por_categoria = {
-        "entretenimento": [
-            {"titulo": "Novo filme brasileiro é aclamado em Cannes", "conteudo": "A produção nacional conquistou elogios internacionais."},
-            {"titulo": "Cantor famoso anuncia álbum surpresa", "conteudo": "O álbum chega às plataformas digitais na próxima sexta-feira."},
-            {"titulo": "Reality show bate recorde de audiência", "conteudo": "O programa alcançou 40 milhões de telespectadores em sua estreia."}
-        ],
-        "política": [
-            {"titulo": "Congresso aprova nova lei tributária", "conteudo": "O texto altera regras de impostos sobre consumo."},
-            {"titulo": "Presidente se reúne com líderes mundiais", "conteudo": "O encontro discutiu medidas contra mudanças climáticas."},
-            {"titulo": "Eleições municipais têm recorde de candidatos jovens", "conteudo": "Maioria deles disputa pela primeira vez um cargo público."}
-        ],
-        "esporte": [
-            {"titulo": "Brasil conquista ouro no vôlei", "conteudo": "Seleção vence final emocionante contra a Itália."},
-            {"titulo": "Time X vence clássico nacional", "conteudo": "Com gol nos acréscimos, garantiu liderança do campeonato."},
-            {"titulo": "Atleta quebra recorde mundial", "conteudo": "Marca foi superada em competição internacional."}
-        ],
-        "receitas": [
-            {"titulo": "Bolo de cenoura fofinho", "conteudo": "Aprenda a fazer o clássico bolo com cobertura de chocolate."},
-            {"titulo": "Macarrão ao molho pesto", "conteudo": "Receita simples e saborosa em apenas 20 minutos."},
-            {"titulo": "Feijoada completa", "conteudo": "O prato típico brasileiro em versão fácil e deliciosa."}
-        ]
-    }
-
-    return jsonify(noticias_por_categoria.get(categoria.lower(), []))
-
-
 if __name__ == "__main__":
     app.run(debug=True)

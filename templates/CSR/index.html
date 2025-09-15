@@ -15,10 +15,10 @@
   <nav class="nav">
     <ul class="nav-ul">
       <li class="nav-li"><a href="" class="nav-a">Home</a></li>
-      <li><a href="#" class="nav-a">Entretenimento</a></li>
-      <li><a href="#" class="nav-a">Política</a></li>
-      <li><a href="#" class="nav-a">Esporte</a></li>
-      <li><a href="#" class="nav-a">Receitas</a></li>
+      <li><a href="" class="nav-a">Entretenimento</a></li>
+      <li><a href="" class="nav-a">Política</a></li>
+      <li><a href="" class="nav-a">Esporte</a></li>
+      <li><a href="" class="nav-a">Receitas</a></li>
     </ul>
     <div class="user"><h2>{{ session['username'] }}</h2></div>
     <div class="sair"><h2><a href="/logout">Sair</a></h2></div>
@@ -32,22 +32,6 @@
 
 
  <main class="main">
-    <h2>Notícias Iniciais (Servidor)</h2>
-    <section id="noticias-servidor" class="cards">
-      {% for noticia in noticias %}
-      <div class="card">
-        <div class="card-content">
-          <h3>{{ noticia.titulo }}</h3>
-          <p>{{ noticia.conteudo }}</p>
-        </div>
-      </div>
-      {% endfor %}
-    </section>
-
-    <h2>Notícias Extras (Carregadas no Cliente)</h2>
-    <section id="noticias-cliente" class="cards">
-      <!-- JavaScript vai inserir aqui -->
-    </section>
   </main>
 
 
@@ -67,26 +51,7 @@
     </div>
   </footer>
 
-<script src="static/js/script.js">    // Assim que a página carrega, busca mais notícias via API
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("/api/ccr_noticias")
-        .then(response => response.json())
-        .then(noticias => {
-          const container = document.getElementById("noticias-cliente");
-          noticias.forEach(noticia => {
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.innerHTML = `
-              <div class="card-content">
-                <h3>${noticia.titulo}</h3>
-                <p>${noticia.conteudo}</p>
-              </div>
-            `;
-            container.appendChild(card);
-          });
-        })
-        .catch(error => console.error("Erro ao carregar notícias extras:", error));
-    });
+<script src="static/js/CSR.js">
 </script>
 </body>
 </html>
